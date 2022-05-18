@@ -7,6 +7,7 @@ public class __init__ {
     public static void run() {
         if(!initFinish) {
             EventHandler.add(new BlockTP());
+            EventHandler.add(new NoFall());
             initFinish = true;
             reset();
         }
@@ -14,5 +15,6 @@ public class __init__ {
 
     public static void reset() {
         BlockTP.disable();
+        NoFall.disable();
     }
 }
