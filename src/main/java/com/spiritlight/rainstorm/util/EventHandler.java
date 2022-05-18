@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class EventHandler {
     public interface Listener {
         void onEvent(Event event);
@@ -13,19 +14,16 @@ public class EventHandler {
 
     private static final List<Listener> listeners = new ArrayList<>();
 
+    // We don't remove to prevent ConcurrentModificationExceptions for now
     public static void add(Listener l) {
-        listeners.add(l);
+        if(!listeners.contains(l))
+            listeners.add(l);
     }
-
-    public static void remove(Listener l) {
-        listeners.remove(l);
-    }
-
 
     @SubscribeEvent
     public void event(Event event) {
-        for (Listener l : listeners) {
-            l.onEvent(event);
+        for (Listener it : listeners) {
+            it.onEvent(event);
         }
     }
 }

@@ -8,35 +8,37 @@ import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-import java.util.ConcurrentModificationException;
-
 public final class BlockTP extends Mod implements EventHandler.Listener {
-    static BlockTP self = new BlockTP();
     static boolean enabled = false;
 
     public static void enable() {
-        Messenger.send("Right-Click on a block to teleport, left click to cancel.");
-        EventHandler.add(self);
-        enabled = true;
+        if(!enabled) {
+            Messenger.send("Right-Click on a block to teleport, left click to cancel.");
+            enabled = true;
+        } else {
+            Messenger.send("BlockTP is active.");
+        }
     }
 
     public static void disable() {
-        try {
-            EventHandler.remove(self);
-        } catch (ConcurrentModificationException e) {
-            e.printStackTrace();
+        if(enabled) {
+            Messenger.send("Disabled BlockTP.");
+            enabled = false;
+        } else {
+            Messenger.send("BlockTP is not active.");
         }
-        Messenger.send("Disabled BlockTP.");
-        enabled = false;
     }
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickBlock || event instanceof PlayerInteractEvent.RightClickEmpty)
-        try {
-            Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
-        } catch (NullPointerException ignored) {
-            Messenger.send("Block too far.");
+        if(!enabled)
+            return;
+        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty) {
+            try {
+                Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
+            } catch (NullPointerException ignored) {
+                Messenger.send("Invalid block.");
+            }
         }
         if(event instanceof PlayerInteractEvent.LeftClickBlock || event instanceof PlayerInteractEvent.LeftClickEmpty) {
             disable();

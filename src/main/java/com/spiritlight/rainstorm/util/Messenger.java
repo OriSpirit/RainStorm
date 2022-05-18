@@ -1,6 +1,6 @@
 package com.spiritlight.rainstorm.util;
 
-import com.spiritlight.rainstorm.enums.Game;
+import com.spiritlight.rainstorm.constants.Game;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
