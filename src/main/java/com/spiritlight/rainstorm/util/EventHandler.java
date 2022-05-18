@@ -1,11 +1,12 @@
 package com.spiritlight.rainstorm.util;
 
 import net.minecraftforge.fml.common.eventhandler.Event;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventHandler extends EventListener {
+public class EventHandler {
     public interface Listener {
         void onEvent(Event event);
     }
@@ -20,9 +21,11 @@ public class EventHandler extends EventListener {
         listeners.remove(l);
     }
 
-    public static void event() {
+
+    @SubscribeEvent
+    public void event(Event event) {
         for (Listener l : listeners) {
-            l.onEvent(EventListener.getEvent());
+            l.onEvent(event);
         }
     }
 }

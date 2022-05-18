@@ -21,6 +21,7 @@ public class MainMod
         KeyBindings.register();
         MinecraftForge.EVENT_BUS.register(new KeyBindings());
         MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
+        MinecraftForge.EVENT_BUS.register(new com.spiritlight.rainstorm.util.EventHandler());
     }
 
     @EventHandler

@@ -10,12 +10,14 @@ import javax.annotation.Nullable;
 
 public class RayTraceBlock {
     private static final EntityPlayerSP player = Minecraft.getMinecraft().player;
-    private static final RayTraceResult block = player.rayTrace(20.0d, 0.0f);
+    private static final double maxTraceRadius = 36.0d;
     public static @Nullable BlockPos getPos() {
+        RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? block.getBlockPos() : null;
     }
 
     public static @Nullable BlockWorldState getState() {
+        RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? (BlockWorldState) player.world.getBlockState(block.getBlockPos()) : null;
     }
 }

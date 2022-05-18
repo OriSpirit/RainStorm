@@ -1,9 +1,9 @@
 package com.spiritlight.rainstorm.enums;
 
 public enum Game {
-    PREFIX("§1[§bRain§1]§r");
+    PREFIX();
 
-    @SuppressWarnings("unused")
-    Game(String s) {
+    Game() {
+        String s = "§1[§bRain§1]§r";
     }
 }

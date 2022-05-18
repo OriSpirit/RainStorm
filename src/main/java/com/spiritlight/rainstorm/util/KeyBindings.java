@@ -23,6 +23,8 @@ public class KeyBindings
         }
         KeyBindings.alreadyCreated = true;
         ClientRegistry.registerKeyBinding(KeyBindings.CLOSE_SILENTLY);
+        ClientRegistry.registerKeyBinding(KeyBindings.BLOCKTP);
+        ClientRegistry.registerKeyBinding(KeyBindings.BLINK);
     }
 
     @SubscribeEvent
@@ -41,7 +43,10 @@ public class KeyBindings
             return;
         }
         if(KeyBindings.BLOCKTP.isPressed()) {
-            BlockTP.setEnabled(true);
+            if(BlockTP.isEnabled()) {
+                BlockTP.disable();
+            } else
+                BlockTP.enable();
         }
     }
 
