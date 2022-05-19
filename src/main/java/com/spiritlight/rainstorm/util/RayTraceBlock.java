@@ -1,6 +1,9 @@
 package com.spiritlight.rainstorm.util;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockWorldState;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.math.BlockPos;
@@ -16,8 +19,13 @@ public class RayTraceBlock {
         return block != null ? block.getBlockPos() : null;
     }
 
-    public static @Nullable BlockWorldState getState() {
+    public static @Nullable IBlockState getBlockState() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
-        return block != null ? (BlockWorldState) player.world.getBlockState(block.getBlockPos()) : null;
+        return block != null ? player.world.getBlockState(block.getBlockPos()) : null;
+    }
+
+    public static @Nullable Material getBlock() {
+        RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
+        return block != null ? player.world.getBlockState(block.getBlockPos()).getMaterial() : null;
     }
 }

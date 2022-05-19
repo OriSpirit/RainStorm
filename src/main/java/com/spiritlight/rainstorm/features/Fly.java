@@ -24,6 +24,7 @@ public class Fly extends Mod {
         if(player == null) return;
         if(!player.capabilities.isCreativeMode) {
             player.capabilities.allowFlying = false;
+            player.capabilities.isFlying = false;
         } else {
             Messenger.send("This plugin is disabled for creative mode players.");
         }

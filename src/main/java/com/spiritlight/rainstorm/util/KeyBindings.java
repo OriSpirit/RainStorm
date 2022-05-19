@@ -33,6 +33,7 @@ public class KeyBindings
             if(Blink.isEnabled())
                 Blink.disable();
             else Blink.enable();
+            return;
         }
         if(KeyBindings.BLOCKTP.isPressed()) {
             if(BlockTP.isEnabled()) {
@@ -40,16 +41,19 @@ public class KeyBindings
             } else {
                 BlockTP.enable();
             }
+            return;
         }
         if(KeyBindings.NOFALL.isPressed()) {
             if(NoFall.isEnabled())
                 NoFall.disable();
             else NoFall.enable();
+            return;
         }
         if(KeyBindings.FLY.isPressed()) {
             if(Fly.isEnabled())
                 Fly.disable();
             else Fly.enable();
+            return;
         }
     }
 

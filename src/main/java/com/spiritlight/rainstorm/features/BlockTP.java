@@ -4,9 +4,14 @@ import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.EventHandler;
 import com.spiritlight.rainstorm.util.Messenger;
 import com.spiritlight.rainstorm.util.RayTraceBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import java.util.Objects;
 
 public final class BlockTP extends Mod implements EventHandler.Listener {
 
@@ -22,20 +27,20 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
     public static void disable() {
         if(enabled) {
             Messenger.send("Disabled BlockTP.");
-            enabled = false;
-        } else {
-            Messenger.send("BlockTP is not active.");
         }
+        enabled = false;
     }
 
     @Override
     public void onEvent(Event event) {
         if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty && enabled) {
             try {
+                if(RayTraceBlock.getBlock() == Material.AIR || RayTraceBlock.getBlock() == null) {
+                    Messenger.send("Distance specified too far.");
+                    return;
+                }
                 Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
-            } catch (NullPointerException ignored) {
-                Messenger.send("Invalid block.");
-            }
+            } catch (NullPointerException ignored) {}
         }
         if(event instanceof PlayerInteractEvent.LeftClickBlock || event instanceof PlayerInteractEvent.LeftClickEmpty) {
             disable();

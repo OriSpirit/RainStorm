@@ -16,9 +16,11 @@ public class NoFall extends Mod implements EventHandler.Listener {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if (player == null) return;
         if (!enabled || !player.isAirBorne || player.capabilities.isCreativeMode) return;
-        try {
-            Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayer(true));
-        } catch (NullPointerException ignored) {}
+        if(player.motionY < -0.5) {
+            try {
+                Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayer(true));
+            } catch (NullPointerException ignored) {}
+        }
     }
 
     public static void enable() {
@@ -28,5 +30,4 @@ public class NoFall extends Mod implements EventHandler.Listener {
     public static void disable() {
         enabled = false;
     }
-
 }
