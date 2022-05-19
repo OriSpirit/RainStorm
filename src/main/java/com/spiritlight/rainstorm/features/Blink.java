@@ -1,5 +1,6 @@
 package com.spiritlight.rainstorm.features;
 
+import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.Messenger;
 import io.netty.channel.*;
 import net.minecraft.client.Minecraft;
@@ -9,7 +10,7 @@ import net.minecraft.network.Packet;
 
 import java.util.LinkedList;
 
-public class Blink {
+public class Blink extends Mod {
     private static final LinkedList<Packet<? extends INetHandler>> queuedPackets = new LinkedList<>();
 
     public static void enable() {
@@ -23,6 +24,7 @@ public class Blink {
         };
         final ChannelPipeline pipeline = minecraft.getConnection().getNetworkManager().channel().pipeline();
         pipeline.addBefore("packet_handler", "packet_disabler", packetHandler);
+        enabled = true;
     }
 
     public static void disable() {
@@ -37,5 +39,11 @@ public class Blink {
             networkHandler.sendPacket(queuedPackets.getFirst());
             queuedPackets.removeFirst();
         }
+        enabled = false;
+    }
+
+    public static void disableRP() {
+        queuedPackets.clear();
+        disable();
     }
 }

@@ -9,7 +9,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public final class BlockTP extends Mod implements EventHandler.Listener {
-    static boolean enabled = false;
 
     public static void enable() {
         if(!enabled) {
@@ -31,9 +30,7 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
 
     @Override
     public void onEvent(Event event) {
-        if(!enabled)
-            return;
-        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty) {
+        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty && enabled) {
             try {
                 Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
             } catch (NullPointerException ignored) {

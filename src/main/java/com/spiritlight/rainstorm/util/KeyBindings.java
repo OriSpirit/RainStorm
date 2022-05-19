@@ -1,6 +1,5 @@
 package com.spiritlight.rainstorm.util;
 
-import com.spiritlight.rainstorm.config.status;
 import com.spiritlight.rainstorm.features.*;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -14,7 +13,7 @@ public class KeyBindings
     public static final KeyBinding BLINK;
     public static final KeyBinding BLOCKTP;
     public static final KeyBinding NOFALL;
-    public static final KeyBinding INFINIMANA;
+    public static final KeyBinding FLY;
     private static boolean alreadyCreated;
 
     public static void register() {
@@ -25,38 +24,40 @@ public class KeyBindings
         ClientRegistry.registerKeyBinding(KeyBindings.BLOCKTP);
         ClientRegistry.registerKeyBinding(KeyBindings.BLINK);
         ClientRegistry.registerKeyBinding(KeyBindings.NOFALL);
-        ClientRegistry.registerKeyBinding(KeyBindings.INFINIMANA);
+        ClientRegistry.registerKeyBinding(KeyBindings.FLY);
     }
 
     @SubscribeEvent
     public void onEvent(final InputEvent.KeyInputEvent e) {
         if (KeyBindings.BLINK.isPressed()) {
-            status.blink = !status.blink;
-            if (status.blink) {
-                Blink.enable();
-            } else {
+            if(Blink.isEnabled())
                 Blink.disable();
-            }
+            else Blink.enable();
         }
         if(KeyBindings.BLOCKTP.isPressed()) {
             if(BlockTP.isEnabled()) {
                 BlockTP.disable();
-            } else
+            } else {
                 BlockTP.enable();
+            }
         }
         if(KeyBindings.NOFALL.isPressed()) {
             if(NoFall.isEnabled())
                 NoFall.disable();
-            else
-                NoFall.enable();
+            else NoFall.enable();
+        }
+        if(KeyBindings.FLY.isPressed()) {
+            if(Fly.isEnabled())
+                Fly.disable();
+            else Fly.enable();
         }
     }
 
     static {
         BLINK = new KeyBinding("Blink", Keyboard.KEY_R, "RainStorm");
-        BLOCKTP = new KeyBinding("Block TP", Keyboard.KEY_G, "RainStorm");
+        BLOCKTP = new KeyBinding("Block TP", Keyboard.KEY_B, "RainStorm");
         NOFALL = new KeyBinding("NoFall", Keyboard.KEY_K, "RainStorm");
-        INFINIMANA = new KeyBinding("NoHunger", Keyboard.KEY_H, "RainStorm");
+        FLY = new KeyBinding("Fly", Keyboard.KEY_G, "RainStorm");
         KeyBindings.alreadyCreated = false;
     }
 }

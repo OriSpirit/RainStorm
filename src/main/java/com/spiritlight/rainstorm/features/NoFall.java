@@ -3,6 +3,7 @@ package com.spiritlight.rainstorm.features;
 import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.EventHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
@@ -12,12 +13,12 @@ public class NoFall extends Mod implements EventHandler.Listener {
     // Remove listener if unneeded, add to __init__ if needed
     @Override
     public void onEvent(Event event) {
-        if(!enabled) return;
-        if(Minecraft.getMinecraft().player.fallDistance > 2) {
-            try {
-                Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayer(true));
-            } catch (NullPointerException ignored) {}
-        }
+        EntityPlayerSP player = Minecraft.getMinecraft().player;
+        if (player == null) return;
+        if (!enabled || !player.isAirBorne || player.capabilities.isCreativeMode) return;
+        try {
+            Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayer(true));
+        } catch (NullPointerException ignored) {}
     }
 
     public static void enable() {
@@ -27,4 +28,5 @@ public class NoFall extends Mod implements EventHandler.Listener {
     public static void disable() {
         enabled = false;
     }
+
 }

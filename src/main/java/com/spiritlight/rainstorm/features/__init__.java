@@ -16,5 +16,6 @@ public class __init__ {
     public static void reset() {
         BlockTP.disable();
         NoFall.disable();
+        Fly.disable();
     }
 }
