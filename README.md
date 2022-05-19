@@ -10,6 +10,13 @@ RainStorm is a growing Minecraft utility mod, keep in mind that some utility mod
 - Blink: Spoofs lag for you to do things easier.
 - Fly: Enables your ability to fly.
 
+# Releases
+Releases are found exclusively in the Releases tab of the GitHub page. Any other releases (let it be off site, from external devices, etc) are considered unofficial releases and should be avoided if possible.
+
+If any damage was caused using unofficial releases, I do not hold any responsibility.
+### Currently Approved Release sites
+- GitHub
+
 # Disclaimers
 I do not hold responsibility for any damage caused while using this mod, this may include but not limited to being terminated access on Minecraft servers or server crashing.
 
