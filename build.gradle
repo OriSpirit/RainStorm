@@ -81,6 +81,12 @@ dependencies {
 
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
