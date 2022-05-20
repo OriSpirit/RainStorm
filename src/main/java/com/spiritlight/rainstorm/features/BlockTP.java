@@ -4,16 +4,13 @@ import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.EventHandler;
 import com.spiritlight.rainstorm.util.Messenger;
 import com.spiritlight.rainstorm.util.RayTraceBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-import java.util.Objects;
-
 public final class BlockTP extends Mod implements EventHandler.Listener {
+    public static String modName = "BlockTP";
 
     public static void enable() {
         if(!enabled) {

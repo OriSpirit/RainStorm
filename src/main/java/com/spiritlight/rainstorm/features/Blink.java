@@ -11,6 +11,7 @@ import net.minecraft.network.Packet;
 import java.util.LinkedList;
 
 public class Blink extends Mod {
+    public static String modName = "Blink";
     private static final LinkedList<Packet<? extends INetHandler>> queuedPackets = new LinkedList<>();
 
     public static void enable() {
