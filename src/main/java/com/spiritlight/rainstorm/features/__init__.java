@@ -8,7 +8,7 @@ public class __init__ {
         if(!initFinish) {
             EventHandler.add(new BlockTP());
             EventHandler.add(new NoFall());
-            EventHandler.add(new ModSpoof());
+            EventHandler.add(new EntityVelocity());
             initFinish = true;
             reset();
         }
@@ -18,6 +18,6 @@ public class __init__ {
         BlockTP.disable();
         NoFall.disable();
         Fly.disable();
-        ModSpoof.disable();
+        EntityVelocity.disable();
     }
 }

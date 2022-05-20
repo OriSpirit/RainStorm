@@ -10,6 +10,7 @@ public class PacketHandler extends ChannelDuplexHandler {
     @Override
     public void write(ChannelHandlerContext ctx, Object obj, ChannelPromise promise) throws Exception {
         if(obj instanceof Packet && status.cancelNextInventoryPacket && obj.getClass().getName().contains("CPacketCloseWindow")) {
+            status.cancelNextInventoryPacket = false;
             return;
         }
         super.write(ctx, obj, promise);

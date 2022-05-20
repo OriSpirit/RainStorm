@@ -30,7 +30,8 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
 
     @Override
     public void onEvent(Event event) {
-        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty && enabled) {
+        if(!enabled) return;
+        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty) {
             try {
                 if(RayTraceBlock.getBlock() == Material.AIR || RayTraceBlock.getBlock() == null) {
                     Messenger.send("Distance specified too far.");

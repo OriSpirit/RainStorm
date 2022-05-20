@@ -14,6 +14,7 @@ public class KeyBindings
     public static final KeyBinding BLOCKTP;
     public static final KeyBinding NOFALL;
     public static final KeyBinding FLY;
+    public static final KeyBinding ENTITYVELOCITY;
     private static boolean alreadyCreated;
 
     public static void register() {
@@ -25,6 +26,7 @@ public class KeyBindings
         ClientRegistry.registerKeyBinding(KeyBindings.BLINK);
         ClientRegistry.registerKeyBinding(KeyBindings.NOFALL);
         ClientRegistry.registerKeyBinding(KeyBindings.FLY);
+        ClientRegistry.registerKeyBinding(KeyBindings.ENTITYVELOCITY);
     }
 
     @SubscribeEvent
@@ -55,6 +57,12 @@ public class KeyBindings
             else Fly.enable();
             return;
         }
+        if(KeyBindings.ENTITYVELOCITY.isPressed()) {
+            if(EntityVelocity.isEnabled())
+                EntityVelocity.disable();
+            else EntityVelocity.enable();
+            return;
+        }
     }
 
     static {
@@ -62,6 +70,7 @@ public class KeyBindings
         BLOCKTP = new KeyBinding("Block TP", Keyboard.KEY_B, "RainStorm");
         NOFALL = new KeyBinding("NoFall", Keyboard.KEY_K, "RainStorm");
         FLY = new KeyBinding("Fly", Keyboard.KEY_G, "RainStorm");
+        ENTITYVELOCITY = new KeyBinding("EntityVelocity", Keyboard.KEY_N, "RainStorm");
         KeyBindings.alreadyCreated = false;
     }
 }
