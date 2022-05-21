@@ -1,6 +1,7 @@
 package com.spiritlight.rainstorm.util;
 
 import com.spiritlight.rainstorm.constants.Features;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;
@@ -8,11 +9,22 @@ import java.util.*;
 
 public class TeleportPathFinder {
     private static int steps = 0;
+    // Returns an ordered ArrayList as a teleportation sequence
     public static ArrayList<BlockPos> findOptimalPath(BlockPos destination) {
         boolean isFound = false;
+        Set<BlockPos> sequence = new HashSet<>();
+        Set<BlockPos> scannedBlockPos = new HashSet<>();
+        BlockPos initialStep = Minecraft.getMinecraft().player.getPosition();
+        BlockPos destinationBlock = BlockUtils.TargetBlock(RayTraceBlock.getResult());
         while(steps < Features.PathFinder.MAX_STEPS && !isFound) {
-            steps++;
+            sequence.addAll(scannedBlockPos);
+            sequence.add(initialStep);
+            sequence.removeAll(scannedBlockPos);
+            BlockPos pos = getShortestPath(sequence);
 
+            steps++;
+            scannedBlockPos.addAll(new HashSet<>(sequence));
+            sequence.clear();
         }
         return null;
     }
