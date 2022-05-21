@@ -26,4 +26,8 @@ public class RayTraceBlock {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? player.world.getBlockState(block.getBlockPos()).getMaterial() : null;
     }
+
+    public static @Nullable RayTraceResult getResult() {
+        return player.rayTrace(maxTraceRadius, 0.0f);
+    }
 }
