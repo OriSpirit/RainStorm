@@ -13,6 +13,10 @@ import java.util.List;
 
 public final class BlockTP extends Mod implements EventHandler.Listener {
     public static String modName = "BlockTP";
+    final static BlockPosUtils blockPosUtils = new BlockPosUtils();
+    final static BlockUtils blockUtils = new BlockUtils();
+    final static RayTraceBlock rayTrace = new RayTraceBlock();
+    final static TeleportPathFinder finder = new TeleportPathFinder();
 
     public static void enable() {
         if(!enabled) {
@@ -35,19 +39,19 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
         if(!enabled) return;
         if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty) {
             try {
-                if(RayTraceBlock.getBlock() == Material.AIR || RayTraceBlock.getBlock() == null) {
+                if(rayTrace.getBlock() == Material.AIR || rayTrace.getBlock() == null) {
                     Messenger.send("Distance specified too far.");
                     return;
                 }
-                Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
+                Minecraft.getMinecraft().player.setPosition(rayTrace.getPos().getX() + 0.5, rayTrace.getPos().getY(), rayTrace.getPos().getZ() + 0.5);
             } catch (NullPointerException ignored) {}
         }
         if(event instanceof PlayerInteractEvent.RightClickBlock) {
             // Handle pathfinding here
-            Messenger.send("Attempting to go through " + Arrays.toString(BlockPosUtils.toStringArray(BlockUtils.TargetBlock())));
-            List<BlockPos> sequence = TeleportPathFinder.findOptimalPath(BlockUtils.TargetBlock());
+            Messenger.send("Attempting to go through " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
+            List<BlockPos> sequence = finder.findOptimalPath(blockUtils.TargetBlock());
             if(sequence == null) {
-                Messenger.send("No available pathing for the destination " + Arrays.toString(BlockPosUtils.toStringArray(BlockUtils.TargetBlock())));
+                Messenger.send("No available pathing for the destination " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
                 return;
             }
             for(BlockPos b : sequence) {

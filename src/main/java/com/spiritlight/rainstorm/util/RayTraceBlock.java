@@ -10,24 +10,24 @@ import net.minecraft.util.math.RayTraceResult;
 import javax.annotation.Nullable;
 
 public class RayTraceBlock {
-    private static final EntityPlayerSP player = Minecraft.getMinecraft().player;
-    private static final double maxTraceRadius = 36.0d;
-    public static @Nullable BlockPos getPos() {
+    private final EntityPlayerSP player = Minecraft.getMinecraft().player;
+    private final double maxTraceRadius = 36.0d;
+    public @Nullable BlockPos getPos() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? block.getBlockPos() : null;
     }
 
-    public static @Nullable IBlockState getBlockState() {
+    public @Nullable IBlockState getBlockState() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? player.world.getBlockState(block.getBlockPos()) : null;
     }
 
-    public static @Nullable Material getBlock() {
+    public @Nullable Material getBlock() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? player.world.getBlockState(block.getBlockPos()).getMaterial() : null;
     }
 
-    public static @Nullable RayTraceResult getResult() {
+    public @Nullable RayTraceResult getResult() {
         return player.rayTrace(maxTraceRadius, 0.0f);
     }
 }

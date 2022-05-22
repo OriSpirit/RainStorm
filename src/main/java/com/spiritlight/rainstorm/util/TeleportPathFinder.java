@@ -8,8 +8,10 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 public class TeleportPathFinder {
+    final BlockPosUtils blockPosUtils = new BlockPosUtils();
+    final BlockUtils blockUtils = new BlockUtils();
     // Returns an ordered ArrayList as a teleportation sequence
-    public static List<BlockPos> findOptimalPath(BlockPos destination) {
+    public List<BlockPos> findOptimalPath(BlockPos destination) {
         int steps = 0;
         Set<BlockPos> sequence = new HashSet<>();
         Set<BlockPos> scannedBlockPos = new HashSet<>();
@@ -21,9 +23,9 @@ public class TeleportPathFinder {
             sequence.add(initialStep);
             sequence.removeAll(scannedBlockPos);
             for(BlockPos pos : sequence) {
-                scanList.addAll(BlockPosUtils.getSurroundingBlocks(pos));
+                scanList.addAll(blockPosUtils.getSurroundingBlocks(pos));
             }
-            BlockPos shortestPath = getShortestPath(sequence, destination);
+            BlockPos shortestPath = getShortestPath(scanList, destination);
             result.add(shortestPath);
             if(shortestPath == destination) {
                 return result;
@@ -35,12 +37,12 @@ public class TeleportPathFinder {
         return null;
     }
 
-    private static BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList, @Nonnull BlockPos destination) {
+    private BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList, @Nonnull BlockPos destination) {
         Map<Double, BlockPos> distance = new HashMap<>();
         double shortestDistance = Double.MAX_VALUE;
         for(BlockPos pos : sequenceList) {
-            shortestDistance = Math.min(BlockUtils.getDistance(pos, destination), shortestDistance);
-            distance.put(BlockUtils.getDistance(pos, destination), pos);
+            shortestDistance = Math.min(blockUtils.getDistance(pos, destination), shortestDistance);
+            distance.put(blockUtils.getDistance(pos, destination), pos);
         }
         return distance.get(shortestDistance);
     }
