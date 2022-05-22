@@ -44,6 +44,7 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
         }
         if(event instanceof PlayerInteractEvent.RightClickBlock) {
             // Handle pathfinding here
+            Messenger.send("Attempting to go through " + Arrays.toString(BlockPosUtils.toStringArray(BlockUtils.TargetBlock())));
             List<BlockPos> sequence = TeleportPathFinder.findOptimalPath(BlockUtils.TargetBlock());
             if(sequence == null) {
                 Messenger.send("No available pathing for the destination " + Arrays.toString(BlockPosUtils.toStringArray(BlockUtils.TargetBlock())));
