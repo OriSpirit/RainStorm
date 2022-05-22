@@ -8,20 +8,26 @@ import javax.annotation.Nonnull;
 import java.util.*;
 
 public class TeleportPathFinder {
-    private static int steps = 0;
     // Returns an ordered ArrayList as a teleportation sequence
-    public static ArrayList<BlockPos> findOptimalPath(BlockPos destination) {
-        boolean isFound = false;
+    public static List<BlockPos> findOptimalPath(BlockPos destination) {
+        int steps = 0;
         Set<BlockPos> sequence = new HashSet<>();
         Set<BlockPos> scannedBlockPos = new HashSet<>();
+        List<BlockPos> result = new ArrayList<>();
         BlockPos initialStep = Minecraft.getMinecraft().player.getPosition();
-        BlockPos destinationBlock = BlockUtils.TargetBlock(RayTraceBlock.getResult());
-        while(steps < Features.PathFinder.MAX_STEPS && !isFound) {
+        while(steps < Features.PathFinder.MAX_STEPS) {
+            Set<BlockPos> scanList = new HashSet<>();
             sequence.addAll(scannedBlockPos);
             sequence.add(initialStep);
             sequence.removeAll(scannedBlockPos);
-            BlockPos pos = getShortestPath(sequence);
-
+            for(BlockPos pos : sequence) {
+                scanList.addAll(BlockPosUtils.getSurroundingBlocks(pos));
+            }
+            BlockPos shortestPath = getShortestPath(sequence, destination);
+            result.add(shortestPath);
+            if(shortestPath == destination) {
+                return result;
+            }
             steps++;
             scannedBlockPos.addAll(new HashSet<>(sequence));
             sequence.clear();
@@ -29,17 +35,13 @@ public class TeleportPathFinder {
         return null;
     }
 
-    private static BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList) {
+    private static BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList, @Nonnull BlockPos destination) {
         Map<Double, BlockPos> distance = new HashMap<>();
         double shortestDistance = Double.MAX_VALUE;
         for(BlockPos pos : sequenceList) {
-            shortestDistance = Math.min(getLength(pos), shortestDistance);
-            distance.put(getLength(pos), pos);
+            shortestDistance = Math.min(BlockUtils.getDistance(pos, destination), shortestDistance);
+            distance.put(BlockUtils.getDistance(pos, destination), pos);
         }
         return distance.get(shortestDistance);
-    }
-
-    private static double getLength(BlockPos pos) {
-        return Math.sqrt(Math.pow(pos.getX(), 2) + Math.pow(pos.getY(), 2) + Math.pow(pos.getZ(), 2));
     }
 }

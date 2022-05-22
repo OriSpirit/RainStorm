@@ -1,17 +1,15 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.util.EventHandler;
-import com.spiritlight.rainstorm.util.Messenger;
-import com.spiritlight.rainstorm.util.RayTraceBlock;
-import com.spiritlight.rainstorm.util.TeleportPathFinder;
+import com.spiritlight.rainstorm.util.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public final class BlockTP extends Mod implements EventHandler.Listener {
     public static String modName = "BlockTP";
@@ -44,9 +42,13 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
                 Minecraft.getMinecraft().player.setPosition(RayTraceBlock.getPos().getX() + 0.5, RayTraceBlock.getPos().getY(), RayTraceBlock.getPos().getZ() + 0.5);
             } catch (NullPointerException ignored) {}
         }
-        if(event instanceof PlayerInteractEvent.RightClickBlock && false) {
+        if(event instanceof PlayerInteractEvent.RightClickBlock) {
             // Handle pathfinding here
-            ArrayList<BlockPos> sequence = TeleportPathFinder.findOptimalPath(RayTraceBlock.getPos());
+            List<BlockPos> sequence = TeleportPathFinder.findOptimalPath(BlockUtils.TargetBlock());
+            if(sequence == null) {
+                Messenger.send("No available pathing for the destination " + Arrays.toString(BlockPosUtils.toStringArray(BlockUtils.TargetBlock())));
+                return;
+            }
             for(BlockPos b : sequence) {
                 Minecraft.getMinecraft().player.setPosition(b.getX()+0.5, b.getY(), b.getZ()+0.5);
             }
