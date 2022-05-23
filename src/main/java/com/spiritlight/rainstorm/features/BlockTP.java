@@ -4,6 +4,7 @@ import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
@@ -15,8 +16,8 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
     public static String modName = "BlockTP";
     final static BlockPosUtils blockPosUtils = new BlockPosUtils();
     final static BlockUtils blockUtils = new BlockUtils();
-    final static RayTraceBlock rayTrace = new RayTraceBlock();
     final static TeleportPathFinder finder = new TeleportPathFinder();
+    final static PlayerUtils playerUtils = new PlayerUtils();
 
     public static void enable() {
         if(!enabled) {
@@ -35,31 +36,43 @@ public final class BlockTP extends Mod implements EventHandler.Listener {
     }
 
     @Override
-    public void onEvent(Event event) {
-        if(!enabled) return;
-        if(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickEmpty) {
+    public void onEvent(Event e) {
+        if(!(e instanceof  PlayerInteractEvent)) return;
+        PlayerInteractEvent event = (PlayerInteractEvent) e;
+        // second check to prevent duplication of events
+        if(!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        // event.getHand() == EnumHand.MAIN_HAND
+        if((event instanceof PlayerInteractEvent.RightClickItem && event.getHand() == EnumHand.MAIN_HAND || event instanceof PlayerInteractEvent.RightClickEmpty && event.getHand() == EnumHand.MAIN_HAND)) {
+            final RayTraceBlock rayTrace = new RayTraceBlock();
             try {
-                if(rayTrace.getBlock() == Material.AIR || rayTrace.getBlock() == null) {
-                    Messenger.send("Distance specified too far.");
+                if((rayTrace.getBlock() == Material.AIR || rayTrace.getBlock() == null) && !playerUtils.getPlayer().isSneaking()) {
+                    Messenger.send("Distance specified too far (Hold shift to force teleport)");
                     return;
                 }
                 Minecraft.getMinecraft().player.setPosition(rayTrace.getPos().getX() + 0.5, rayTrace.getPos().getY(), rayTrace.getPos().getZ() + 0.5);
-            } catch (NullPointerException ignored) {}
+            } catch (NullPointerException ignored) {
+                Messenger.send("Invalid block specified.");
+            }
         }
-        if(event instanceof PlayerInteractEvent.RightClickBlock) {
+        if(event instanceof PlayerInteractEvent.RightClickBlock && event.getHand() == EnumHand.MAIN_HAND) {
             // Handle pathfinding here
             Messenger.send("Attempting to go through " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
             List<BlockPos> sequence = finder.findOptimalPath(blockUtils.TargetBlock());
-            if(sequence == null) {
-                Messenger.send("No available pathing for the destination " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
-                return;
-            }
-            for(BlockPos b : sequence) {
-                Minecraft.getMinecraft().player.setPosition(b.getX()+0.5, b.getY(), b.getZ()+0.5);
+            if(playerUtils.getPlayer().isSneaking()) {
+                playerUtils.teleport(blockUtils.TargetBlock());
+            } else {
+                if(sequence == null) {
+                    Messenger.send("No available pathing for the destination " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())) + ", shift-click to force teleport.");
+                    return;
+                }
+                for (BlockPos b : sequence) {
+                    playerUtils.teleportCenter(b);
+                }
             }
         }
         if(event instanceof PlayerInteractEvent.LeftClickBlock || event instanceof PlayerInteractEvent.LeftClickEmpty) {
             disable();
+            event.setCanceled(true);
         }
     }
 }

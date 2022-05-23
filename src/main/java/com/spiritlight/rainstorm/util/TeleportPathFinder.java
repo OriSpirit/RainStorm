@@ -17,14 +17,14 @@ public class TeleportPathFinder {
         Set<BlockPos> scannedBlockPos = new HashSet<>();
         List<BlockPos> result = new ArrayList<>();
         BlockPos initialStep = Minecraft.getMinecraft().player.getPosition();
+        sequence.add(initialStep);
         while(steps < Features.PathFinder.MAX_STEPS) {
             Set<BlockPos> scanList = new HashSet<>();
-            sequence.addAll(scannedBlockPos);
-            sequence.add(initialStep);
-            sequence.removeAll(scannedBlockPos);
             for(BlockPos pos : sequence) {
-                scanList.addAll(blockPosUtils.getSurroundingBlocks(pos));
+                sequence.addAll(blockPosUtils.getSurroundingBlocks(pos));
             }
+            sequence.addAll(scanList);
+            sequence.removeAll(scannedBlockPos);
             BlockPos shortestPath = getShortestPath(scanList, destination);
             result.add(shortestPath);
             if(shortestPath == destination) {
@@ -38,9 +38,12 @@ public class TeleportPathFinder {
     }
 
     private BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList, @Nonnull BlockPos destination) {
+        final BlockUtils blockUtils = new BlockUtils();
         Map<Double, BlockPos> distance = new HashMap<>();
         double shortestDistance = Double.MAX_VALUE;
         for(BlockPos pos : sequenceList) {
+            if(blockUtils.isBlockSolid(pos))
+                continue;
             shortestDistance = Math.min(blockUtils.getDistance(pos, destination), shortestDistance);
             distance.put(blockUtils.getDistance(pos, destination), pos);
         }
