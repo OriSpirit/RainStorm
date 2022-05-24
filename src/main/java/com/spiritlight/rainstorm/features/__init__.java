@@ -1,5 +1,6 @@
 package com.spiritlight.rainstorm.features;
 
+import com.spiritlight.rainstorm.events.FeatureManager;
 import com.spiritlight.rainstorm.util.EventHandler;
 
 public class __init__ {
@@ -14,10 +15,10 @@ public class __init__ {
     }
 
     public static void reset() {
-        BlockTP.disable();
-        NoFall.disable();
-        Fly.disable();
-        EntityVelocity.disable();
-        HuntedGlow.disable();
+        FeatureManager.blockTP.disable();
+        FeatureManager.noFall.disable();
+        FeatureManager.fly.disable();
+        FeatureManager.entityVelocity.disable();
+        FeatureManager.huntedGlow.disable();
     }
 }

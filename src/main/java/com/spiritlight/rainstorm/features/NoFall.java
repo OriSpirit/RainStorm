@@ -8,7 +8,7 @@ import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class NoFall extends Mod implements EventHandler.Listener {
-    public static String modName = "NoFall";
+    public String modName = "NoFall";
     @Override
     public void onEvent(Event event) {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
@@ -19,13 +19,5 @@ public class NoFall extends Mod implements EventHandler.Listener {
                 Minecraft.getMinecraft().getConnection().sendPacket(new CPacketPlayer(true));
             } catch (NullPointerException ignored) {}
         }
-    }
-
-    public static void enable() {
-        enabled = true;
-    }
-
-    public static void disable() {
-        enabled = false;
     }
 }

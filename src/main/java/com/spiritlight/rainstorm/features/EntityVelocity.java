@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class EntityVelocity extends Mod implements EventHandler.Listener {
-    public static String modName = "EntityVelocity";
+    public String modName = "EntityVelocity";
     // Remove listener if unneeded, add to __init__ if needed
     @Override
     public void onEvent(Event event) {
@@ -25,7 +25,4 @@ public class EntityVelocity extends Mod implements EventHandler.Listener {
 
         } catch (NullPointerException ignored) {}
     }
-    public static void enable() { enabled = true; }
-    public static void disable() { enabled = false; }
-
 }

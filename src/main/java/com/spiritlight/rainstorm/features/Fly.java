@@ -6,8 +6,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 
 public class Fly extends Mod {
-    public static String modName = "Fly";
-    public static void enable() {
+    public String modName = "Fly";
+    public void enable() {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if(player == null) return;
         if(!player.capabilities.isCreativeMode) {
@@ -19,7 +19,7 @@ public class Fly extends Mod {
         }
     }
 
-    public static void disable() {
+    public void disable() {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if(player == null) return;
         if(!player.capabilities.isCreativeMode) {

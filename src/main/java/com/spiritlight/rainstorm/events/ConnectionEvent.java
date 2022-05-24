@@ -1,7 +1,6 @@
 package com.spiritlight.rainstorm.events;
 
 import com.spiritlight.rainstorm.MainMod;
-import com.spiritlight.rainstorm.features.Blink;
 import com.spiritlight.rainstorm.network.PacketHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
@@ -18,6 +17,6 @@ public class ConnectionEvent {
     public void onServerDisconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
         MainMod.isConnected = false;
         event.getManager().channel().pipeline().remove("spirit_packet_handler");
-        Blink.disableRP(); // Specifically here to disable these mods
+        FeatureManager.blink.disableRP(); // Specifically here to disable these mods
     }
 }

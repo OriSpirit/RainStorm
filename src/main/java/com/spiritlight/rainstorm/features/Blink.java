@@ -11,10 +11,10 @@ import net.minecraft.network.Packet;
 import java.util.LinkedList;
 
 public class Blink extends Mod {
-    public static String modName = "Blink";
-    private static final LinkedList<Packet<? extends INetHandler>> queuedPackets = new LinkedList<>();
+    public String modName = "Blink";
+    private final LinkedList<Packet<? extends INetHandler>> queuedPackets = new LinkedList<>();
 
-    public static void enable() {
+    public void enable() {
         Messenger.send("Enabled blink");
         final Minecraft minecraft = Minecraft.getMinecraft();
         final ChannelDuplexHandler packetHandler = new ChannelDuplexHandler() {
@@ -28,7 +28,7 @@ public class Blink extends Mod {
         enabled = true;
     }
 
-    public static void disable() {
+    public void disable() {
         Messenger.send("Disabled blink");
         final Minecraft minecraft = Minecraft.getMinecraft();
         final NetHandlerPlayClient networkHandler = minecraft.getConnection();
@@ -43,7 +43,7 @@ public class Blink extends Mod {
         enabled = false;
     }
 
-    public static void disableRP() {
+    public void disableRP() {
         queuedPackets.clear();
         disable();
     }

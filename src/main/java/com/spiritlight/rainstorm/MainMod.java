@@ -35,7 +35,8 @@ public class MainMod
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        __init__.run();
+        __init__ init = new __init__();
+        init.run();
     }
 
 

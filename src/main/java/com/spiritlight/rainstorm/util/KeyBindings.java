@@ -1,5 +1,6 @@
 package com.spiritlight.rainstorm.util;
 
+import com.spiritlight.rainstorm.events.FeatureManager;
 import com.spiritlight.rainstorm.features.*;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
@@ -26,27 +27,27 @@ public class KeyBindings
     @SubscribeEvent
     public void onEvent(final InputEvent.KeyInputEvent e) {
         if(keyBindings[0].isPressed()) {
-            Blink.toggle();
+            FeatureManager.blink.toggle();
             return;
         }
         if(keyBindings[1].isPressed()) {
-            BlockTP.toggle();
+            FeatureManager.blockTP.toggle();
             return;
         }
         if(keyBindings[2].isPressed()) {
-            NoFall.toggle();
+            FeatureManager.noFall.toggle();
             return;
         }
         if(keyBindings[3].isPressed()) {
-            Fly.toggle();
+            FeatureManager.fly.toggle();
             return;
         }
         if(keyBindings[4].isPressed()) {
-            EntityVelocity.toggle();
+            FeatureManager.entityVelocity.toggle();
             return;
         }
         if(keyBindings[5].isPressed()) {
-            GhostBlock.toggle();
+            FeatureManager.ghostBlock.toggle();
             return;
         }
     }

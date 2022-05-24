@@ -12,13 +12,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class BlockTP extends Mod {
-    public static String modName = "BlockTP";
-    final static BlockPosUtils blockPosUtils = new BlockPosUtils();
-    final static BlockUtils blockUtils = new BlockUtils();
-    final static TeleportPathFinder finder = new TeleportPathFinder();
-    final static PlayerUtils playerUtils = new PlayerUtils();
+    public String modName = "BlockTP";
+    final BlockPosUtils blockPosUtils = new BlockPosUtils();
+    final BlockUtils blockUtils = new BlockUtils();
+    final TeleportPathFinder finder = new TeleportPathFinder();
+    final PlayerUtils playerUtils = new PlayerUtils();
 
-    public static void enable() {
+    public void enable() {
         if(!enabled) {
             Messenger.send("Right-Click on a block to teleport, left click to cancel.");
             enabled = true;
@@ -27,7 +27,7 @@ public final class BlockTP extends Mod {
         }
     }
 
-    public static void disable() {
+    public void disable() {
         if(enabled) {
             Messenger.send("Disabled BlockTP.");
         }
