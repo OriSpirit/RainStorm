@@ -3,6 +3,9 @@ package com.spiritlight.rainstorm.util;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class VecTransformer {
     public static class Vector3d {
         public static Vec3d toVec3d(Vec3i vector) {

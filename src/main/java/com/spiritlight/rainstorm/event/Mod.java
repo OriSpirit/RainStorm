@@ -8,4 +8,10 @@ public abstract class Mod implements ModBase {
     public static boolean isEnabled() {
         return enabled;
     }
+    public static boolean toggle() {
+        enabled = !enabled;
+        if(enabled)
+            enable();
+        else disable();
+        return enabled; }
 }

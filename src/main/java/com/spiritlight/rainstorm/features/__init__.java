@@ -6,7 +6,6 @@ public class __init__ {
     private static boolean initFinish = false;
     public static void run() {
         if(!initFinish) {
-            EventHandler.add(new BlockTP());
             EventHandler.add(new NoFall());
             EventHandler.add(new EntityVelocity());
             initFinish = true;
@@ -19,5 +18,6 @@ public class __init__ {
         NoFall.disable();
         Fly.disable();
         EntityVelocity.disable();
+        HuntedGlow.disable();
     }
 }

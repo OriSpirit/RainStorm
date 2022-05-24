@@ -4,6 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.math.BlockPos;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@ParametersAreNonnullByDefault
 public class PlayerUtils {
     public BlockPos getPlayerCameraPos() {
         final EntityPlayerSP player = Minecraft.getMinecraft().player;

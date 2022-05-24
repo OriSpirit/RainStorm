@@ -7,27 +7,28 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 
-import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNullableByDefault;
 
+@ParametersAreNullableByDefault
 public class RayTraceBlock {
     private final EntityPlayerSP player = Minecraft.getMinecraft().player;
     private final double maxTraceRadius = 36.0d;
-    public @Nullable BlockPos getPos() {
+    public BlockPos getPos() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? block.getBlockPos() : null;
     }
 
-    public @Nullable IBlockState getBlockState() {
+    public IBlockState getBlockState() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? player.world.getBlockState(block.getBlockPos()) : null;
     }
 
-    public @Nullable Material getBlock() {
+    public Material getBlock() {
         RayTraceResult block = player.rayTrace(maxTraceRadius, 0.0f);
         return block != null ? player.world.getBlockState(block.getBlockPos()).getMaterial() : null;
     }
 
-    public @Nullable RayTraceResult getResult() {
+    public RayTraceResult getResult() {
         return player.rayTrace(maxTraceRadius, 0.0f);
     }
 }

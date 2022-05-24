@@ -4,13 +4,15 @@ import com.spiritlight.rainstorm.constants.Features;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 
+@ParametersAreNonnullByDefault
 public class TeleportPathFinder {
     final BlockPosUtils blockPosUtils = new BlockPosUtils();
     // Returns an ordered ArrayList as a teleportation sequence
-    public List<BlockPos> findOptimalPath(BlockPos destination) {
+    public @Nullable List<BlockPos> findOptimalPath(BlockPos destination) {
         int steps = 0;
         Set<BlockPos> sequence = new HashSet<>();
         Set<BlockPos> scannedBlockPos = new HashSet<>();
@@ -36,7 +38,7 @@ public class TeleportPathFinder {
         return null;
     }
 
-    private BlockPos getShortestPath(@Nonnull Set<BlockPos> sequenceList, @Nonnull BlockPos destination) {
+    private BlockPos getShortestPath(Set<BlockPos> sequenceList, BlockPos destination) {
         final BlockUtils blockUtils = new BlockUtils();
         Map<Double, BlockPos> distance = new HashMap<>();
         double shortestDistance = Double.MAX_VALUE;

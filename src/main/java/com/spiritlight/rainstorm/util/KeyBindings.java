@@ -1,6 +1,7 @@
 package com.spiritlight.rainstorm.util;
 
 import com.spiritlight.rainstorm.features.*;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -10,11 +11,7 @@ import org.lwjgl.input.Keyboard;
 
 public class KeyBindings
 {
-    public static final KeyBinding BLINK;
-    public static final KeyBinding BLOCKTP;
-    public static final KeyBinding NOFALL;
-    public static final KeyBinding FLY;
-    public static final KeyBinding ENTITYVELOCITY;
+    public static KeyBinding[] keyBindings = new KeyBinding[6];
     private static boolean alreadyCreated;
 
     public static void register() {
@@ -22,55 +19,33 @@ public class KeyBindings
             return;
         }
         KeyBindings.alreadyCreated = true;
-        ClientRegistry.registerKeyBinding(KeyBindings.BLOCKTP);
-        ClientRegistry.registerKeyBinding(KeyBindings.BLINK);
-        ClientRegistry.registerKeyBinding(KeyBindings.NOFALL);
-        ClientRegistry.registerKeyBinding(KeyBindings.FLY);
-        ClientRegistry.registerKeyBinding(KeyBindings.ENTITYVELOCITY);
+        for(KeyBinding k : keyBindings)
+            ClientRegistry.registerKeyBinding(k);
     }
 
     @SubscribeEvent
     public void onEvent(final InputEvent.KeyInputEvent e) {
-        if (KeyBindings.BLINK.isPressed()) {
-            if(Blink.isEnabled())
-                Blink.disable();
-            else Blink.enable();
-            return;
-        }
-        if(KeyBindings.BLOCKTP.isPressed()) {
-            if(BlockTP.isEnabled()) {
-                BlockTP.disable();
-            } else {
-                BlockTP.enable();
-            }
-            return;
-        }
-        if(KeyBindings.NOFALL.isPressed()) {
-            if(NoFall.isEnabled())
-                NoFall.disable();
-            else NoFall.enable();
-            return;
-        }
-        if(KeyBindings.FLY.isPressed()) {
-            if(Fly.isEnabled())
-                Fly.disable();
-            else Fly.enable();
-            return;
-        }
-        if(KeyBindings.ENTITYVELOCITY.isPressed()) {
-            if(EntityVelocity.isEnabled())
-                EntityVelocity.disable();
-            else EntityVelocity.enable();
-            return;
-        }
+        if(keyBindings[0].isPressed())
+            Blink.toggle();
+        if(keyBindings[1].isPressed())
+            BlockTP.toggle();
+        if(keyBindings[2].isPressed())
+            NoFall.toggle();
+        if(keyBindings[3].isPressed())
+            Fly.toggle();
+        if(keyBindings[4].isPressed())
+            EntityVelocity.toggle();
+        if(keyBindings[5].isPressed())
+            GhostBlock.toggle();
     }
 
     static {
-        BLINK = new KeyBinding("Blink", Keyboard.KEY_R, "RainStorm");
-        BLOCKTP = new KeyBinding("Block TP", Keyboard.KEY_B, "RainStorm");
-        NOFALL = new KeyBinding("NoFall", Keyboard.KEY_K, "RainStorm");
-        FLY = new KeyBinding("Fly", Keyboard.KEY_G, "RainStorm");
-        ENTITYVELOCITY = new KeyBinding("EntityVelocity", Keyboard.KEY_N, "RainStorm");
+        keyBindings[0] = new KeyBinding("Blink", Keyboard.KEY_R, "RainStorm");
+        keyBindings[1] = new KeyBinding("BlockTP", Keyboard.KEY_B, "RainStorm");
+        keyBindings[2] = new KeyBinding("NoFall", Keyboard.KEY_K, "RainStorm");
+        keyBindings[3] = new KeyBinding("Fly", Keyboard.KEY_G, "RainStorm");
+        keyBindings[4] = new KeyBinding("EntityVelocity", Keyboard.KEY_N, "RainStorm");
+        keyBindings[5] = new KeyBinding("GhostBlock", Keyboard.KEY_M, "RainStorm");
         KeyBindings.alreadyCreated = false;
     }
 }
