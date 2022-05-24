@@ -9,7 +9,7 @@ import net.minecraft.util.math.RayTraceResult;
 
 import javax.annotation.ParametersAreNullableByDefault;
 
-@ParametersAreNullableByDefault
+@ParametersAreNullableByDefault @SuppressWarnings("unused")
 public class RayTraceBlock {
     private final EntityPlayerSP player = Minecraft.getMinecraft().player;
     private final double maxTraceRadius = 36.0d;

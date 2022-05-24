@@ -25,18 +25,30 @@ public class KeyBindings
 
     @SubscribeEvent
     public void onEvent(final InputEvent.KeyInputEvent e) {
-        if(keyBindings[0].isPressed())
+        if(keyBindings[0].isPressed()) {
             Blink.toggle();
-        if(keyBindings[1].isPressed())
+            return;
+        }
+        if(keyBindings[1].isPressed()) {
             BlockTP.toggle();
-        if(keyBindings[2].isPressed())
+            return;
+        }
+        if(keyBindings[2].isPressed()) {
             NoFall.toggle();
-        if(keyBindings[3].isPressed())
+            return;
+        }
+        if(keyBindings[3].isPressed()) {
             Fly.toggle();
-        if(keyBindings[4].isPressed())
+            return;
+        }
+        if(keyBindings[4].isPressed()) {
             EntityVelocity.toggle();
-        if(keyBindings[5].isPressed())
+            return;
+        }
+        if(keyBindings[5].isPressed()) {
             GhostBlock.toggle();
+            return;
+        }
     }
 
     static {

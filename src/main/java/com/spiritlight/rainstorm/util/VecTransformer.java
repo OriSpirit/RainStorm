@@ -5,7 +5,7 @@ import net.minecraft.util.math.Vec3i;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
+@ParametersAreNonnullByDefault @SuppressWarnings("unused")
 public class VecTransformer {
     public static class Vector3d {
         public static Vec3d toVec3d(Vec3i vector) {

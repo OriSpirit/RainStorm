@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
+@ParametersAreNonnullByDefault @SuppressWarnings("unused")
 public class PlayerUtils {
     public BlockPos getPlayerCameraPos() {
         final EntityPlayerSP player = Minecraft.getMinecraft().player;

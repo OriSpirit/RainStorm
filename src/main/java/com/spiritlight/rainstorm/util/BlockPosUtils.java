@@ -5,14 +5,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
+@ParametersAreNonnullByDefault @SuppressWarnings("unused")
 public class BlockPosUtils {
     public BlockPos edit(BlockPos pos, double x, double y, double z) {
         return new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
