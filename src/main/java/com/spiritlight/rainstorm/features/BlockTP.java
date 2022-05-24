@@ -13,11 +13,8 @@ import java.util.List;
 
 public final class BlockTP extends Mod {
     public String modName = "BlockTP";
-    final BlockPosUtils blockPosUtils = new BlockPosUtils();
-    final BlockUtils blockUtils = new BlockUtils();
-    final TeleportPathFinder finder = new TeleportPathFinder();
-    final PlayerUtils playerUtils = new PlayerUtils();
 
+    @Override
     public void enable() {
         if(!enabled) {
             Messenger.send("Right-Click on a block to teleport, left click to cancel.");
@@ -27,33 +24,38 @@ public final class BlockTP extends Mod {
         }
     }
 
+    @Override
     public void disable() {
         if(enabled) {
             Messenger.send("Disabled BlockTP.");
+            enabled = false;
         }
-        enabled = false;
     }
 
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickEmpty event) {
         if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
-        if (event.getHand() == EnumHand.MAIN_HAND) {
-            final RayTraceBlock rayTrace = new RayTraceBlock();
-            try {
-                if ((rayTrace.getBlock() == Material.AIR || rayTrace.getBlock() == null) && !playerUtils.getPlayer().isSneaking()) {
-                    Messenger.send("Distance specified too far (Hold shift to force teleport)");
-                    return;
-                }
-                playerUtils.teleportCenter(blockPosUtils.getValidTeleportBlock(rayTrace.getPos()));
-            } catch (NullPointerException ignored) {
-                Messenger.send("Invalid block specified.");
+        final RayTraceBlock rayTrace = new RayTraceBlock();
+        final BlockPosUtils blockPosUtils = new BlockPosUtils();
+        final PlayerUtils playerUtils = new PlayerUtils();
+        try {
+            if ((rayTrace.getBlock() == Material.AIR || rayTrace.getBlock() == null) && !playerUtils.getPlayer().isSneaking()) {
+                Messenger.send("Distance specified too far (Hold shift to force teleport)");
+                return;
             }
+            playerUtils.teleportCenter(blockPosUtils.getValidTeleportBlock(rayTrace.getPos()));
+        } catch (NullPointerException ignored) {
+            Messenger.send("Invalid block specified.");
         }
     }
 
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        final BlockPosUtils blockPosUtils = new BlockPosUtils();
+        final PlayerUtils playerUtils = new PlayerUtils();
+        final BlockUtils blockUtils = new BlockUtils();
+        final TeleportPathFinder finder = new TeleportPathFinder();
         // Handle pathfinding here
         Messenger.send("Attempting to go through " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
         List<BlockPos> sequence = finder.findOptimalPath(blockUtils.TargetBlock());
@@ -73,6 +75,12 @@ public final class BlockTP extends Mod {
 
     @SubscribeEvent
     public void onLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
+        if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        disable();
+    }
+
+    @SubscribeEvent
+    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
         if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
         disable();
     }

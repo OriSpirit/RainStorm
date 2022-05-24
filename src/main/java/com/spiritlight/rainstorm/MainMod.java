@@ -1,6 +1,7 @@
 package com.spiritlight.rainstorm;
 
 import com.spiritlight.rainstorm.events.ConnectionEvent;
+import com.spiritlight.rainstorm.events.FeatureManager;
 import com.spiritlight.rainstorm.features.BlockTP;
 import com.spiritlight.rainstorm.features.GhostBlock;
 import com.spiritlight.rainstorm.features.HuntedGlow;
@@ -27,16 +28,15 @@ public class MainMod
         MinecraftForge.EVENT_BUS.register(new KeyBindings());
         MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
         MinecraftForge.EVENT_BUS.register(new com.spiritlight.rainstorm.util.EventHandler());
-        MinecraftForge.EVENT_BUS.register(new BlockTP());
-        MinecraftForge.EVENT_BUS.register(new GhostBlock());
-        MinecraftForge.EVENT_BUS.register(new HuntedGlow());
+        MinecraftForge.EVENT_BUS.register(FeatureManager.blockTP);
+        MinecraftForge.EVENT_BUS.register(FeatureManager.ghostBlock);
+        MinecraftForge.EVENT_BUS.register(FeatureManager.huntedGlow);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        __init__ init = new __init__();
-        init.run();
+        __init__.run();
     }
 
 

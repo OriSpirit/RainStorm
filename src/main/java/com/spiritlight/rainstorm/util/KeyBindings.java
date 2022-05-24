@@ -1,8 +1,6 @@
 package com.spiritlight.rainstorm.util;
 
 import com.spiritlight.rainstorm.events.FeatureManager;
-import com.spiritlight.rainstorm.features.*;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +22,7 @@ public class KeyBindings
             ClientRegistry.registerKeyBinding(k);
     }
 
+    @SuppressWarnings("UnnecessaryReturnStatement")
     @SubscribeEvent
     public void onEvent(final InputEvent.KeyInputEvent e) {
         if(keyBindings[0].isPressed()) {

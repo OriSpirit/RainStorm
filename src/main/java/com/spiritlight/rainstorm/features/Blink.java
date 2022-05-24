@@ -14,6 +14,7 @@ public class Blink extends Mod {
     public String modName = "Blink";
     private final LinkedList<Packet<? extends INetHandler>> queuedPackets = new LinkedList<>();
 
+    @Override
     public void enable() {
         Messenger.send("Enabled blink");
         final Minecraft minecraft = Minecraft.getMinecraft();
@@ -28,6 +29,7 @@ public class Blink extends Mod {
         enabled = true;
     }
 
+    @Override
     public void disable() {
         Messenger.send("Disabled blink");
         final Minecraft minecraft = Minecraft.getMinecraft();

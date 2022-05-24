@@ -7,6 +7,8 @@ import net.minecraft.client.entity.EntityPlayerSP;
 
 public class Fly extends Mod {
     public String modName = "Fly";
+
+    @Override
     public void enable() {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if(player == null) return;
@@ -19,6 +21,7 @@ public class Fly extends Mod {
         }
     }
 
+    @Override
     public void disable() {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if(player == null) return;
