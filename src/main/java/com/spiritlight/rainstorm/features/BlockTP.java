@@ -16,20 +16,15 @@ public final class BlockTP extends Mod {
 
     @Override
     public void enable() {
-        if(!enabled) {
+        if(enabled) {
             Messenger.send("Right-Click on a block to teleport, left click to cancel.");
-            enabled = true;
-        } else {
-            Messenger.send("BlockTP is active.");
         }
     }
 
     @Override
     public void disable() {
-        if(enabled) {
-            Messenger.send("Disabled BlockTP.");
-            enabled = false;
-        }
+        Messenger.send("Disabled BlockTP.");
+        enabled = false;
     }
 
     @SubscribeEvent
@@ -58,7 +53,7 @@ public final class BlockTP extends Mod {
         final TeleportPathFinder finder = new TeleportPathFinder();
         // Handle pathfinding here
         Messenger.send("Attempting to go through " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
-        List<BlockPos> sequence = finder.findOptimalPath(blockUtils.TargetBlock());
+        List<BlockPos> sequence = finder.findOptimalPath(blockPosUtils.getValidTeleportBlock(blockUtils.TargetBlock()));
         if (playerUtils.getPlayer().isSneaking()) {
             playerUtils.teleportCenter(blockPosUtils.getValidTeleportBlock(blockUtils.TargetBlock()));
         } else {
