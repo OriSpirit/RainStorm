@@ -5,10 +5,14 @@ Minecraft 1.12.2 Utility Mod
 RainStorm is a growing Minecraft utility mod, keep in mind that some utility mods are not allowed in certain servers.
 
 # Features
-- BlockTP: Teleports you to the block looking at.
-- NoFall: You no longer take fall damage.
-- Blink: Spoofs lag for you to do things easier.
-- Fly: Enables your ability to fly.
+- BlockTP: Teleports you to the block looking at. [B]*
+- NoFall: You no longer take fall damage. [K]
+- Blink: Spoofs lag for you to do things easier. [R]
+- Fly: Enables your ability to fly. [G]
+- GhostBlock: Removes blocks clicked (LClick) [M]
+- EntityVelocity: Changes vehicle speed [N]*
+
+*: Feature unstable
 
 # Releases
 Releases are found exclusively in the Releases tab of the GitHub page. Any other releases (let it be off site, from external devices, etc) are considered unofficial releases and should be avoided if possible.
