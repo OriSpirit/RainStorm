@@ -46,7 +46,10 @@ public final class BlockTP extends Mod {
 
     @SubscribeEvent
     public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        if (!enabled)
+            return;
+        if(event.getHand() == EnumHand.OFF_HAND)
+            return;
         final BlockPosUtils blockPosUtils = new BlockPosUtils();
         final PlayerUtils playerUtils = new PlayerUtils();
         final BlockUtils blockUtils = new BlockUtils();

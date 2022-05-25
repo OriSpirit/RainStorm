@@ -29,9 +29,9 @@ public class TeleportPathFinder {
                 scanList.addAll(blockPosUtils.getSurroundingBlocks(pos));
             }
             scanList.removeAll(scannedBlockPos);
-            final BlockPos shortestPath = getShortestPath(scanList, destination);
+            BlockPos shortestPath = getShortestPath(scanList, destination);
             result.add(shortestPath);
-            if(blockPosUtils.posEquals(shortestPath, destination) || blockPosUtils.equalsFloor(shortestPath, destination)) {
+            if (blockPosUtils.posEquals(shortestPath, destination) || blockPosUtils.equalsFloor(shortestPath, destination)) {
                 return result;
             }
             steps++;
