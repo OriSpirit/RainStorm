@@ -29,7 +29,10 @@ public final class BlockTP extends Mod {
 
     @SubscribeEvent
     public void onRightClick(PlayerInteractEvent.RightClickEmpty event) {
-        if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        if (!enabled)
+            return;
+        if(event.getHand() == EnumHand.OFF_HAND)
+            return;
         final RayTraceBlock rayTrace = new RayTraceBlock();
         final BlockPosUtils blockPosUtils = new BlockPosUtils();
         final PlayerUtils playerUtils = new PlayerUtils();
@@ -73,13 +76,19 @@ public final class BlockTP extends Mod {
 
     @SubscribeEvent
     public void onLeftClick(PlayerInteractEvent.LeftClickEmpty event) {
-        if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        if (!enabled)
+            return;
+        if(event.getHand() == EnumHand.OFF_HAND)
+            return;
         disable();
     }
 
     @SubscribeEvent
     public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
-        if (!enabled || event.getHand() == EnumHand.OFF_HAND) return;
+        if (!enabled)
+            return;
+        if(event.getHand() == EnumHand.OFF_HAND)
+            return;
         disable();
     }
 }

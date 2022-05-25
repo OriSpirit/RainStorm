@@ -17,7 +17,8 @@ public class BlockUtils {
         PlayerUtils playerUtils = new PlayerUtils();
         BlockPosUtils blockPosUtils = new BlockPosUtils();
         final EntityPlayerSP player = Minecraft.getMinecraft().player;
-        Vec3d playerFacingPos = VecTransformer.Vector3d.edit(player.getLookVec().normalize(), 0, -player.getLookVec().normalize().y, 0);
+        Vec3d playerFacingPos = player.getLookVec().normalize();
+        // Vec3d playerFacingPos = VecTransformer.Vector3d.edit(player.getLookVec().normalize(), 0, -player.getLookVec().normalize().y, 0);
         BlockPos playerLookingAt = playerUtils.getPlayerCameraPos();
         Material material = TargetMaterial(playerLookingAt);
         double[] pos = blockPosUtils.toDoubleArray(playerLookingAt);
