@@ -30,6 +30,8 @@ public class TeleportPathFinder {
             }
             scanList.removeAll(scannedBlockPos);
             BlockPos shortestPath = getShortestPath(scanList, destination);
+            if(shortestPath == null)
+                return null;
             result.add(shortestPath);
             if (blockPosUtils.posEquals(shortestPath, destination) || blockPosUtils.equalsFloor(shortestPath, destination)) {
                 return result;

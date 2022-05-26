@@ -23,7 +23,7 @@ public class BlockUtils {
         Material material = TargetMaterial(playerLookingAt);
         double[] pos = blockPosUtils.toDoubleArray(playerLookingAt);
         int iterations = 0;
-        while((!hasCrossedBlock || (material != Material.AIR && playerLookingAt != playerUtils.getCurrentCameraBlock())) && iterations < Features.PathFinder.MAX_LOOKUP) {
+        while((!hasCrossedBlock || (material != Material.AIR && playerLookingAt != playerUtils.getPlayerCameraPos())) && iterations < Features.PathFinder.MAX_LOOKUP) {
             pos[0] += playerFacingPos.x;
             pos[1] += playerFacingPos.y;
             pos[2] += playerFacingPos.z;

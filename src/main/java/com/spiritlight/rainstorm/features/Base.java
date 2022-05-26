@@ -1,16 +1,15 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.util.EventHandler;
-import net.minecraftforge.fml.common.eventhandler.Event;
+import com.spiritlight.rainstorm.events.Listener;
 
 // only for reference uses, REMOVE ANNOTATION WHEN USING
 @SuppressWarnings("all")
-public class Base extends Mod implements EventHandler.Listener {
+public class Base extends Mod implements Listener {
     public String modName = "Base";
     // Remove listener if unneeded, add to __init__ if needed
     @Override
-    public void onEvent(Event event) {
+    public void onUpdate() {
         if(!enabled) return;
     }
     public void enable() { enabled = true; }

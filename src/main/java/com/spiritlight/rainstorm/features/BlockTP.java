@@ -58,8 +58,18 @@ public final class BlockTP extends Mod {
         final BlockUtils blockUtils = new BlockUtils();
         final TeleportPathFinder finder = new TeleportPathFinder();
         // Handle pathfinding here
-        Messenger.send("Attempting to go through " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
-        List<BlockPos> sequence = finder.findOptimalPath(blockPosUtils.getValidTeleportBlock(blockUtils.TargetBlock()));
+        List<BlockPos> sequence;
+        try {
+            Messenger.send("Attempting to go to " + Arrays.toString(blockPosUtils.toStringArray(blockUtils.TargetBlock())));
+            sequence = finder.findOptimalPath(blockPosUtils.getValidTeleportBlock(blockUtils.TargetBlock()));
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            Messenger.send("ERROR: Specified block is invalid: " + blockUtils.TargetBlock());
+            Messenger.send("Other details: \nEvent pos: " + event.getPos() + "\nVec: " + event.getHitVec());
+            Messenger.send(e.getClass().getCanonicalName());
+            Messenger.send(Arrays.toString(e.getStackTrace()).replace(",", "\n"));
+            return;
+        }
         if (playerUtils.getPlayer().isSneaking()) {
             playerUtils.teleportCenter(blockPosUtils.getValidTeleportBlock(blockUtils.TargetBlock()));
         } else {

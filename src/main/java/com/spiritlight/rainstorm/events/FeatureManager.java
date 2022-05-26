@@ -9,6 +9,5 @@ public class FeatureManager {
     public static final EntityVelocity entityVelocity = new EntityVelocity();
     public static final Fly fly = new Fly();
     public static final GhostBlock ghostBlock = new GhostBlock();
-    public static final HuntedGlow huntedGlow = new HuntedGlow();
     public static final NoFall noFall = new NoFall();
 }

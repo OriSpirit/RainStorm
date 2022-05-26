@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GhostBlock extends Mod {
     @SubscribeEvent
-    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+    public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         if(!enabled) return;
         if(event.getHand() == EnumHand.OFF_HAND) return;
         Minecraft.getMinecraft().world.setBlockToAir(event.getPos());

@@ -2,9 +2,6 @@ package com.spiritlight.rainstorm;
 
 import com.spiritlight.rainstorm.events.ConnectionEvent;
 import com.spiritlight.rainstorm.events.FeatureManager;
-import com.spiritlight.rainstorm.features.BlockTP;
-import com.spiritlight.rainstorm.features.GhostBlock;
-import com.spiritlight.rainstorm.features.HuntedGlow;
 import com.spiritlight.rainstorm.features.__init__;
 import com.spiritlight.rainstorm.util.KeyBindings;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,10 +24,8 @@ public class MainMod
         KeyBindings.register();
         MinecraftForge.EVENT_BUS.register(new KeyBindings());
         MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
-        MinecraftForge.EVENT_BUS.register(new com.spiritlight.rainstorm.util.EventHandler());
         MinecraftForge.EVENT_BUS.register(FeatureManager.blockTP);
         MinecraftForge.EVENT_BUS.register(FeatureManager.ghostBlock);
-        MinecraftForge.EVENT_BUS.register(FeatureManager.huntedGlow);
     }
 
     @EventHandler

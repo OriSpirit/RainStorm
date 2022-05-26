@@ -13,12 +13,6 @@ public class PlayerUtils {
         return new BlockPos(player.getPosition().getX(), player.getPosition().getY() + player.eyeHeight, player.getPosition().getZ());
     }
 
-    public BlockPos getCurrentCameraBlock() {
-        final EntityPlayerSP player = Minecraft.getMinecraft().player;
-        BlockPosUtils blockPosUtils = new BlockPosUtils();
-        return new BlockPos(blockPosUtils.edit(player.getPosition(), 0, player.getEyeHeight(), 0));
-    }
-
     public EntityPlayerSP getPlayer() {
         return Minecraft.getMinecraft().player;
     }
