@@ -55,6 +55,19 @@ minecraft {
     }
 }
 
+configurations {
+    provided
+}
+
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'org.jetbrains:annotations:23.0.0'
@@ -81,7 +94,7 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    provided 'com.squareup.okhttp3:okhttp:4.9.3'
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -94,14 +107,18 @@ tasks.withType(JavaCompile) {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Title": "RainStorm",
+            "Specification-Vendor": "OriTheSpirit",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"OriTheSpirit",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from configurations.provided.asFileTree.files.collect {
+        zipTree(it)
     }
 }
 

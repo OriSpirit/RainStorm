@@ -16,5 +16,6 @@ public class __init__ {
         FeatureManager.noFall.disable();
         FeatureManager.fly.disable();
         FeatureManager.entityVelocity.disable();
+        FeatureManager.spider.disable();
     }
 }

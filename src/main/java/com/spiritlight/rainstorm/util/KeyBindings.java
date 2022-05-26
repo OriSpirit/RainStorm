@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 public class KeyBindings
 {
-    public static KeyBinding[] keyBindings = new KeyBinding[6];
+    public static KeyBinding[] keyBindings = new KeyBinding[7];
     private static boolean alreadyCreated;
 
     public static void register() {
@@ -49,6 +49,10 @@ public class KeyBindings
             FeatureManager.ghostBlock.toggle();
             return;
         }
+        if(keyBindings[6].isPressed()) {
+            FeatureManager.spider.toggle();
+            return;
+        }
     }
 
     static {
@@ -58,6 +62,7 @@ public class KeyBindings
         keyBindings[3] = new KeyBinding("Fly", Keyboard.KEY_G, "RainStorm");
         keyBindings[4] = new KeyBinding("EntityVelocity", Keyboard.KEY_N, "RainStorm");
         keyBindings[5] = new KeyBinding("GhostBlock", Keyboard.KEY_M, "RainStorm");
+        keyBindings[6] = new KeyBinding("Spider", Keyboard.KEY_J, "RainStorm");
         KeyBindings.alreadyCreated = false;
     }
 }
