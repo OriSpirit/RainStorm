@@ -42,7 +42,7 @@ public final class EventManager
             e.printStackTrace();
 
             CrashReport report =
-                    CrashReport.makeCrashReport(e, "Firing Wurst event");
+                    CrashReport.makeCrashReport(e, "Firing event");
             CrashReportCategory category =
                     report.makeCategory("Affected event");
             category.addDetail("Event class", () -> event.getClass().getName());
@@ -72,7 +72,7 @@ public final class EventManager
             e.printStackTrace();
 
             CrashReport report =
-                    CrashReport.makeCrashReport(e, "Adding Wurst event listener");
+                    CrashReport.makeCrashReport(e, "Adding event listener");
             CrashReportCategory category =
                     report.makeCategory("Affected listener");
             category.addDetail("Listener type", type::getName);
