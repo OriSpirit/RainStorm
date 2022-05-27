@@ -39,9 +39,9 @@ public interface PlayerMoveListener extends Listener
         }
 
         @Override
-        public Class<PlayerMoveEvent> getListenerType()
+        public Class<PlayerMoveListener> getListenerType()
         {
-            return PlayerMoveEvent.class;
+            return PlayerMoveListener.class;
         }
     }
 }
