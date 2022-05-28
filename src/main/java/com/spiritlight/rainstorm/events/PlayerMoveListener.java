@@ -9,7 +9,7 @@ import com.spiritlight.rainstorm.event.CancellableEvent;
 // Code again from https://github.com/Wurst-Imperium/Wurst-MC-1.12
 public interface PlayerMoveListener extends Listener
 {
-    void eventName(PlayerMoveEvent event);
+    void onPlayerMove(PlayerMoveEvent event);
 
     class PlayerMoveEvent
             extends CancellableEvent<PlayerMoveListener>
@@ -21,7 +21,7 @@ public interface PlayerMoveListener extends Listener
             this.obj = event;
         }
 
-        public Object methodName()
+        public Object getEvent()
         {
             return obj;
         }
@@ -31,7 +31,7 @@ public interface PlayerMoveListener extends Listener
         {
             for(PlayerMoveListener listener : listeners)
             {
-                listener.eventName(this);
+                listener.onPlayerMove(this);
 
                 if(isCancelled())
                     break;

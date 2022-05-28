@@ -3,12 +3,20 @@ package com.spiritlight.rainstorm.events;
 import com.spiritlight.rainstorm.features.*;
 
 public class FeatureManager {
-    // Register mods here
-    public static final Blink blink = new Blink();
-    public static final BlockTP blockTP = new BlockTP();
-    public static final EntityVelocity entityVelocity = new EntityVelocity();
-    public static final Fly fly = new Fly();
-    public static final GhostBlock ghostBlock = new GhostBlock();
-    public static final NoFall noFall = new NoFall();
-    public static final Spider spider = new Spider();
+    public static Blink blink;
+    public static BlockTP blockTP;
+    public static EntityVelocity entityVelocity;
+    public static Fly fly;
+    public static GhostBlock ghostBlock;
+    public static NoFall noFall;
+    public static Spider spider;
+    private FeatureManager() {
+        blink = new Blink();
+        blockTP = new BlockTP();
+        entityVelocity = new EntityVelocity();
+        fly = new Fly();
+        ghostBlock = new GhostBlock();
+        noFall = new NoFall();
+        spider = new Spider();
+    }
 }

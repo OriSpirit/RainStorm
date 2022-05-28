@@ -1,12 +1,18 @@
 package com.spiritlight.rainstorm.features;
 
+import com.spiritlight.rainstorm.Spirit;
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.events.Listener;
+import com.spiritlight.rainstorm.events.UpdateListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 
-public class Spider extends Mod implements Listener {
+public class Spider extends Mod implements UpdateListener {
     public String modName = "Base";
+    public void enable() {
+        Spirit.INSTANCE.events.add(UpdateListener.class, this);
+        enabled = true; }
+    public void disable() { enabled = false; }
+
     @Override
     public void onUpdate() {
         if(!enabled) return;
@@ -15,7 +21,4 @@ public class Spider extends Mod implements Listener {
         if(player.collidedHorizontally)
             player.motionY = 0.2;
     }
-    public void enable() { enabled = true; }
-    public void disable() { enabled = false; }
-
 }

@@ -1,12 +1,12 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.events.Listener;
+import com.spiritlight.rainstorm.events.UpdateListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.network.play.client.CPacketPlayer;
 
-public class NoFall extends Mod implements Listener {
+public class NoFall extends Mod implements UpdateListener {
     public String modName = "NoFall";
     @Override
     public void onUpdate() {

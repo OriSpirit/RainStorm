@@ -21,7 +21,7 @@ public interface EventsBase extends Listener
             this.obj = obj;
         }
 
-        public Object methodName()
+        public Object getObj()
         {
             return obj;
         }
