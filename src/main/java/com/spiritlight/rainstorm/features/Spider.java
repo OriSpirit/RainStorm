@@ -10,8 +10,12 @@ public class Spider extends Mod implements UpdateListener {
     public String modName = "Base";
     public void enable() {
         Spirit.INSTANCE.events.add(UpdateListener.class, this);
-        enabled = true; }
-    public void disable() { enabled = false; }
+        enabled = true;
+    }
+    public void disable() {
+        Spirit.INSTANCE.events.remove(UpdateListener.class, this);
+        enabled = false;
+    }
 
     @Override
     public void onUpdate() {

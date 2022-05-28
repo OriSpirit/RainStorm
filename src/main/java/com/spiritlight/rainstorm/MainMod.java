@@ -26,6 +26,7 @@ public class MainMod
         MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
         MinecraftForge.EVENT_BUS.register(FeatureManager.blockTP);
         MinecraftForge.EVENT_BUS.register(FeatureManager.ghostBlock);
+        Spirit.INSTANCE.onStart();
     }
 
     @EventHandler
