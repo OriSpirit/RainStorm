@@ -3,6 +3,7 @@ package com.spiritlight.rainstorm.events;
 import java.util.*;
 
 import com.spiritlight.rainstorm.event.Event;
+import com.spiritlight.rainstorm.event.Listener;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.util.ReportedException;

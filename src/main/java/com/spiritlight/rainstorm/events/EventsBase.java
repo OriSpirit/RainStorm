@@ -4,6 +4,7 @@ package com.spiritlight.rainstorm.events;
 import java.util.ArrayList;
 
 import com.spiritlight.rainstorm.event.CancellableEvent;
+import com.spiritlight.rainstorm.event.Listener;
 
 // This is just a base event, nothing should hook to it.
 // Code again from https://github.com/Wurst-Imperium/Wurst-MC-1.12

@@ -2,5 +2,5 @@ package com.spiritlight.rainstorm.event;
 
 import java.util.EventListener;
 
-public interface iListener extends EventListener {
+public interface Listener extends EventListener {
 }
