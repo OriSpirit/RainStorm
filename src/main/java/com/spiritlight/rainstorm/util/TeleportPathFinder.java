@@ -12,7 +12,7 @@ import java.util.*;
 public class TeleportPathFinder {
     final BlockPosUtils blockPosUtils = new BlockPosUtils();
     final BlockUtils blockUtils = new BlockUtils();
-    Set<BlockPos> scannedBlockPos = new HashSet<>();
+    final Set<BlockPos> scannedBlockPos = new HashSet<>();
     // Returns an ordered ArrayList as a teleportation sequence
     public @Nullable List<BlockPos> findOptimalPath(BlockPos destination) {
         int steps = 0;

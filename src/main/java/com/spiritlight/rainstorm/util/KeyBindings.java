@@ -10,7 +10,7 @@ import org.lwjgl.input.Keyboard;
 
 public class KeyBindings
 {
-    public static KeyBinding[] keyBindings = new KeyBinding[7];
+    public static final KeyBinding[] keyBindings = new KeyBinding[7];
     private static boolean alreadyCreated;
 
     public static void register() {

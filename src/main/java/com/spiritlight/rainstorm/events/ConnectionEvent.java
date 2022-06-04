@@ -1,7 +1,7 @@
 package com.spiritlight.rainstorm.events;
 
 import com.spiritlight.rainstorm.MainMod;
-import com.spiritlight.rainstorm.network.PacketHandler;
+import com.spiritlight.rainstorm.util.PacketHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent;
 

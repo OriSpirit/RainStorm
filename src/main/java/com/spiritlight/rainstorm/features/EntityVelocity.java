@@ -1,17 +1,19 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.events.UpdateListener;
+import com.spiritlight.rainstorm.events.EventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
-public class EntityVelocity extends Mod implements UpdateListener {
+public class EntityVelocity extends Mod implements EventHandler.Listener {
     public String modName = "EntityVelocity";
+
     // Remove listener if unneeded, add to __init__ if needed
     @Override
-    public void onUpdate() {
+    public void onEvent(Event event) {
         if(!enabled) return;
         try {
             final Minecraft mc = Minecraft.getMinecraft();

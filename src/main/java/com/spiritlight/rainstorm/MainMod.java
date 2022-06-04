@@ -1,6 +1,7 @@
 package com.spiritlight.rainstorm;
 
 import com.spiritlight.rainstorm.events.ConnectionEvent;
+import com.spiritlight.rainstorm.events.EventListener;
 import com.spiritlight.rainstorm.events.FeatureManager;
 import com.spiritlight.rainstorm.features.__init__;
 import com.spiritlight.rainstorm.util.KeyBindings;
@@ -26,7 +27,7 @@ public class MainMod
         MinecraftForge.EVENT_BUS.register(new ConnectionEvent());
         MinecraftForge.EVENT_BUS.register(FeatureManager.blockTP);
         MinecraftForge.EVENT_BUS.register(FeatureManager.ghostBlock);
-        Spirit.INSTANCE.onStart();
+        MinecraftForge.EVENT_BUS.register(new EventListener());
     }
 
     @EventHandler

@@ -2,7 +2,6 @@ package com.spiritlight.rainstorm.util;
 
 import okhttp3.*;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.util.Map;

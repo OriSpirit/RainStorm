@@ -1,15 +1,17 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
-import com.spiritlight.rainstorm.events.UpdateListener;
+import com.spiritlight.rainstorm.events.EventHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.network.play.client.CPacketPlayer;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
-public class NoFall extends Mod implements UpdateListener {
+public class NoFall extends Mod implements EventHandler.Listener {
     public String modName = "NoFall";
+
     @Override
-    public void onUpdate() {
+    public void onEvent(Event event) {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
         if (player == null) return;
         if (!enabled || !player.isAirBorne || player.capabilities.isCreativeMode) return;
