@@ -11,17 +11,17 @@ public class EventHandler extends EventListener {
         void onEvent(Event event);
     }
 
-    private static final List<Listener> listeners = new ArrayList<>();
+    private final List<Listener> listeners = new ArrayList<>();
 
-    public static void add(Listener l) {
+    public void add(Listener l) {
         listeners.add(l);
     }
 
-    public static void remove(Listener l) {
+    public void remove(Listener l) {
         listeners.remove(l);
     }
 
-    public static void event() {
+    public void event() {
         ArrayList<Listener> listeners2 = new ArrayList<>(listeners);
         listeners.removeIf(Objects::isNull);
         for (Listener l : listeners2) {

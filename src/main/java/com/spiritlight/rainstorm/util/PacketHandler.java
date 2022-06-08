@@ -42,15 +42,20 @@ public class PacketHandler extends ChannelDuplexHandler {
 
     public static boolean discardPacket(String packetName, String type) {
         if(!packetName.contains("Packet")) return false;
-        switch(type) {
-            case READ:
-                discardPacketsR.add(packetName);
-                break;
-            case WRITE:
-                discardPacketsW.add(packetName);
-                break;
-            default:
-                return false;
+        try {
+            switch (type) {
+                case READ:
+                    discardPacketsR.add(packetName);
+                    break;
+                case WRITE:
+                    discardPacketsW.add(packetName);
+                    break;
+                default:
+                    return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
         }
         return true;
     }

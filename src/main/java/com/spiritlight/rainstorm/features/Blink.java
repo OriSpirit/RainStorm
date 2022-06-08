@@ -7,7 +7,6 @@ import com.spiritlight.rainstorm.util.PacketUtils;
 public class Blink extends Mod {
     public String modName = "Blink";
 
-
     @Override
     public void enable() {
         PacketUtils.stopPacket();

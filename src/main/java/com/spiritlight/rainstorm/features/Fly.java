@@ -4,6 +4,7 @@ import com.spiritlight.rainstorm.event.Mod;
 import com.spiritlight.rainstorm.util.Messenger;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraftforge.fml.common.eventhandler.Event;
 
 public class Fly extends Mod {
     public String modName = "Fly";
@@ -33,4 +34,5 @@ public class Fly extends Mod {
         }
         enabled = false;
     }
+
 }

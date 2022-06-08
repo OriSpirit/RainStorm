@@ -1,17 +1,19 @@
 package com.spiritlight.rainstorm.features;
 
 import com.spiritlight.rainstorm.event.Mod;
+import com.spiritlight.rainstorm.events.EventHandler;
 import com.spiritlight.rainstorm.util.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Arrays;
 import java.util.List;
 
-public final class BlockTP extends Mod {
+public final class BlockTP extends Mod implements EventHandler.Listener {
     public String modName = "BlockTP";
 
     @Override
@@ -100,5 +102,10 @@ public final class BlockTP extends Mod {
         if(event.getHand() == EnumHand.OFF_HAND)
             return;
         disable();
+    }
+
+    @Override
+    public void onEvent(Event event) {
+
     }
 }

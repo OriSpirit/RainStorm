@@ -1,6 +1,6 @@
 package com.spiritlight.rainstorm.event;
 
-@SuppressWarnings("unused")
+// @SuppressWarnings("unused")
 public abstract class Mod implements ModBase {
     protected boolean enabled = false;
     public void enable() { enabled = true; }
